@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectBooks, fetchBooks, Status } from '../../store/books'
+import { selectBooks, fetchBooks, Status } from 'store/books'
 import { useLocation } from 'react-router-dom'
 
 function Pagination() {

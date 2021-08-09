@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchBooks, selectBooks } from '../../store/books'
-import SearchForm from '../../components/SearchForm'
-import Books from '../../components/Books'
-import Pagination from '../../components/Books/Pagination'
-import Stack from '../../components/Stack'
+import { fetchBooks, selectBooks } from 'store/books'
+import SearchForm from 'components/SearchForm'
+import Books from 'components/Books'
+import Pagination from 'components/Books/Pagination'
+import Stack from 'components/Stack'
 
 function Result() {
   const dispatch = useDispatch()
