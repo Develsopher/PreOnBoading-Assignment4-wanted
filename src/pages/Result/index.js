@@ -36,8 +36,7 @@ function Result() {
           </Link>
           <SearchForm toggle={toggle} />
           <Books items={items} />
-          {/* {items ? <Pagination /> : <div>검색 결과가 없습니다.</div>} */}
-          <Pagination />
+          {items ? <Pagination /> : <div>검색 결과가 없습니다.</div>}
         </Stack>
       </div>
       <Modal show={show} width={'25%'} height={'45%'} toggle={toggle}>

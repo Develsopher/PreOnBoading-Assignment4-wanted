@@ -2,8 +2,7 @@ import React from 'react'
 import { css } from 'emotion'
 
 function Modal({ show, width, height, toggle, children }) {
-  console.log(show)
-  console.log(children)
+  
   const ModalWrap = css`
     ${show ? 'display: flex' : 'display: none'};
     position: fixed;

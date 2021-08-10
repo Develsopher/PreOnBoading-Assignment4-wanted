@@ -2,7 +2,6 @@ import React from 'react'
 import { css, cx } from 'emotion'
 
 function Book({ defaultClassName, volumeInfo }) {
-  console.log(volumeInfo)
   return (
     <div className={cx([defaultClassName, styles.wrapper])}>
       <img
