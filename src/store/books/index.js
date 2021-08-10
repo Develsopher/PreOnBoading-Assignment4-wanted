@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getBooks } from 'store/books/api'
 
 export const Status = {
@@ -7,6 +7,21 @@ export const Status = {
   Success: 'success',
   Failure: 'failure'
 }
+
+export const fetchBooks = createAsyncThunk(
+  'books/fetchBooks',
+  async ({ search, startIndex = 0 }, { rejectWithValue }) => {
+    console.log('payload creator')
+    try {
+      const response = await getBooks(search, startIndex)
+      const data = await response.json()
+
+      return { ...data, startIndex }
+    } catch (err) {
+      return rejectWithValue(err)
+    }
+  }
+)
 
 const booksSlice = createSlice({
   name: 'books',
@@ -17,46 +32,36 @@ const booksSlice = createSlice({
     status: Status.Idle,
     error: null
   },
-  reducers: {
-    getItemsStart(state, action) {
-      if (action.payload === 0) {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchBooks.pending, (state, action) => {
+      console.log('pending')
+
+      if (!action.meta.arg.startIndex) {
         state.items = []
       }
 
       state.error = null
       state.status = Status.Loading
-    },
-    getItemsSuccess(state, action) {
+    })
+    builder.addCase(fetchBooks.fulfilled, (state, action) => {
       const { items, totalItems, startIndex } = action.payload
-      const nextItems = startIndex ? state.items.concat(items) : items || []
+      const nextItems = startIndex ? state.items.concat(items) : items
 
       state.items = nextItems?.filter((item) => item)
-      state.startIndex = nextItems.length
+      state.startIndex = nextItems?.length
       state.totalItems = totalItems
       state.status = Status.Success
-    },
-    getItemsFailure(state, action) {
+    })
+    builder.addCase(fetchBooks.rejected, (state, action) => {
+      console.log(action.type)
+
+      state.status = Status.Failure
       state.error = action.payload
-    }
+    })
   }
 })
-
-export const { getItemsStart, getItemsSuccess, getItemsFailure } =
-  booksSlice.actions
 
 export default booksSlice.reducer
 
 export const selectBooks = (state) => state.books
-
-export const fetchBooks =
-  (search, startIndex = 0) =>
-  async (dispatch) => {
-    try {
-      dispatch(getItemsStart(startIndex))
-      const response = await getBooks(search, startIndex)
-      const data = await response.json()
-      dispatch(getItemsSuccess({ ...data, startIndex }))
-    } catch (error) {
-      dispatch(getItemsFailure(error))
-    }
-  }

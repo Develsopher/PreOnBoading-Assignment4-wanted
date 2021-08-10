@@ -6,7 +6,7 @@ import Loading from 'components/Loading'
 
 function Pagination() {
   const dispatch = useDispatch()
-  const location = useLocation()
+  const { search } = useLocation()
   const { status, startIndex } = useSelector(selectBooks)
   const isLoading = status === Status.Loading
 
@@ -14,7 +14,7 @@ function Pagination() {
     if (isLoading) {
       return
     }
-    dispatch(fetchBooks(location.search, startIndex))
+    dispatch(fetchBooks({ search, startIndex }))
   }
   return (
     <button
