@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectBooks, fetchBooks, Status } from 'store/books'
 import { useLocation } from 'react-router-dom'
+import Loading from 'components/Loading/index'
 
 function Pagination() {
   const dispatch = useDispatch()
@@ -9,18 +10,19 @@ function Pagination() {
   const { status, startIndex } = useSelector(selectBooks)
   const isLoading = status === Status.Loading
 
+  const handleFetchBooks = () => {
+    if (isLoading) {
+      return
+    }
+    dispatch(fetchBooks(location.search, startIndex))
+  }
   return (
     <button
       className={styles.button}
       disabled={startIndex === 0 || isLoading}
-      onClick={() => {
-        if (isLoading) {
-          return
-        }
-        dispatch(fetchBooks(location.search, startIndex))
-      }}
+      onClick={handleFetchBooks}
     >
-      {isLoading ? '로딩중...' : '더보기'}
+      {isLoading ? <Loading /> : '더보기'}
     </button>
   )
 }
