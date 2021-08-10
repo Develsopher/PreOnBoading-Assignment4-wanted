@@ -5,7 +5,7 @@ function Book({ defaultClassName, volumeInfo }) {
   return (
     <div className={cx([defaultClassName, styles.wrapper])}>
       <img
-        src={volumeInfo?.imageLinks?.thumbnail}
+        src={volumeInfo?.imageLinks?.thumbnail || 'images/default.png'}
         className={cx(
           styles.media,
           css({
@@ -13,7 +13,8 @@ function Book({ defaultClassName, volumeInfo }) {
             height: 128
           })
         )}
-        alt=""
+        alt=","
+        onError={() => (this.img.src = './default.png')}
       />
       <div
         className={cx(
