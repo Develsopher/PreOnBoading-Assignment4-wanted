@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBooks, selectBooks } from 'store/books'
 import SearchForm from 'components/SearchForm'
@@ -23,6 +23,11 @@ function Result() {
   return (
     <div className={styles.wrapper}>
       <Stack gaps={[0, 10, 20, 20]}>
+        <Link to="/">
+          <button link="/" className={styles.button}>
+            책책책 책을 찾읍시다!
+          </button>
+        </Link>
         <SearchForm />
         <Books items={items} />
         <Pagination />
@@ -32,7 +37,8 @@ function Result() {
 }
 
 const styles = {
-  wrapper: 'pb-4'
+  wrapper: 'pb-4',
+  button: 'border rounded bg-blue-500 text-white text-lg'
 }
 
 export default Result
