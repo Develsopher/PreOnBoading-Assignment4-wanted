@@ -3,9 +3,9 @@ import { useLocation, Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchBooks, selectBooks } from 'store/books'
 import SearchForm from 'components/SearchForm'
-import Books from 'components/Books'
-import Pagination from 'components/Books/Pagination'
 import Stack from 'components/Stack'
+import Books from 'pages/Result/components'
+import Pagination from 'pages/Result/components/Pagination'
 
 function Result() {
   const dispatch = useDispatch()
