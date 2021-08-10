@@ -24,7 +24,7 @@ function Result() {
       return
     }
 
-    dispatch(fetchBooks(search))
+    dispatch(fetchBooks({ search }))
   }, [dispatch, search])
 
   return (
