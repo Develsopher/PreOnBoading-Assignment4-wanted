@@ -24,9 +24,7 @@ function Result() {
     <div className={styles.wrapper}>
       <Stack gaps={[0, 10, 20, 20]}>
         <Link to="/">
-          <button link="/" className={styles.button}>
-            책책책 책을 찾읍시다!
-          </button>
+          <button className={styles.button}>책책책 책을 찾읍시다!</button>
         </Link>
         <SearchForm />
         <Books items={items} />
