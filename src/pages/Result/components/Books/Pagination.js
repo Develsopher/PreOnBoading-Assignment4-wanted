@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectBooks, fetchBooks, Status } from 'store/books'
 import { useLocation } from 'react-router-dom'
-import Loading from 'components/Loading/index'
+import Loading from 'components/Loading'
 
 function Pagination() {
   const dispatch = useDispatch()

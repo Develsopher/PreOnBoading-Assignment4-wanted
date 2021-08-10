@@ -1,20 +1,11 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import IconFilter from './IconFilter'
 
-function LinkToFilter() {
-  const location = useLocation()
-
+function LinkToFilter({ toggle }) {
   return (
-    <Link
-      to={{
-        pathname: '/filters',
-        search: location.search
-      }}
-      className={styles.wrapper}
-    >
+    <span onClick={toggle} className={styles.wrapper}>
       <IconFilter />
-    </Link>
+    </span>
   )
 }
 
